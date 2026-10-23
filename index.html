@@ -3,72 +3,98 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Evaluación digital: Variantes genéticas asociadas a la obesidad</title>
+<title>¡Reto Genético! | Variantes genéticas y obesidad</title>
 <style>
-:root{font-family:Arial,Helvetica,sans-serif;color:#202638;background:#f4f7fb}
-body{margin:0;padding:20px}.wrap{max-width:850px;margin:auto}.hero{background:#273c75;color:white;padding:25px;border-radius:18px}
-h1{font-size:clamp(1.5rem,4vw,2.2rem);margin:0 0 10px}.sub{line-height:1.5;margin:0}
-.card{background:white;border-radius:14px;padding:20px;margin:16px 0;box-shadow:0 3px 14px #15213b12}
-.note{background:#edf3ff;border-left:4px solid #4969b0;padding:12px;border-radius:8px;line-height:1.5}
-.q{border-top:1px solid #e4e8f0;padding:16px 0}.q:first-child{border:0}.q p{font-weight:700;line-height:1.4}
-label{display:block;padding:9px 10px;margin:6px 0;border:1px solid #dce2ec;border-radius:9px;cursor:pointer}
-label:hover{background:#f5f7ff}input{margin-right:8px}button{border:0;border-radius:10px;padding:12px 18px;font-size:1rem;font-weight:700;cursor:pointer;margin:5px 7px 5px 0}
-.primary{background:#273c75;color:white}.secondary{background:#e8edf7;color:#24345d}
-#result{display:none}.score{font-size:1.4rem;font-weight:700}.feedback{padding:12px;margin:10px 0;border-radius:9px;line-height:1.5}.good{background:#e6f7ed}.bad{background:#fff1e8}
-.small{font-size:.92rem;color:#4e5870;line-height:1.5}footer{text-align:center;color:#687187;font-size:.85rem;padding:10px}
+:root{--navy:#10234b;--pink:#ed3290;--purple:#7a36b7;--blue:#28a7e8;--ink:#20253b;--muted:#606b83;--line:#dfe6f2;--paper:#fff;--bg:#f4f7ff;--green:#2e9d61}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;color:var(--ink);line-height:1.5}
+header{padding:28px 18px;background:radial-gradient(circle at 15% 20%,#ffb8dc,transparent 25%),radial-gradient(circle at 88% 15%,#8de8ff,transparent 25%),linear-gradient(120deg,#e8d7ff,#d7f5ff,#ffe4f1);border-bottom:5px solid #fff}
+.hero{max-width:1050px;margin:auto;display:grid;grid-template-columns:1fr auto;align-items:center;gap:16px}
+h1{font-size:clamp(2rem,5vw,3.5rem);line-height:1.05;color:#6d168e;margin:0 0 12px}.hero p{font-size:1.1rem;margin:0}.mascot{font-size:clamp(4rem,10vw,7rem);filter:drop-shadow(0 5px 2px #3c317222)}
+.wrap{max-width:1050px;margin:22px auto;padding:0 14px;display:grid;grid-template-columns:200px 1fr;gap:18px}
+nav{background:var(--navy);border-radius:18px;padding:12px;height:max-content;position:sticky;top:10px}
+nav a{display:block;text-decoration:none;color:#fff;padding:12px 13px;margin:5px 0;border-radius:12px;font-weight:700}nav a:first-child{background:var(--pink)}nav a:hover{background:#344b79}
+main{min-width:0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:13px}.card{background:var(--paper);border:1px solid var(--line);border-radius:18px;padding:19px;box-shadow:0 5px 18px #263d6610;margin-bottom:15px}
+.card h2{margin:0 0 10px;font-size:1.3rem}.pink{background:#fff0f8}.blue{background:#eaf8ff}.green{background:#effbea}.lav{background:#f4efff}
+.icon{font-size:1.7rem;float:left;margin-right:10px}.small{font-size:.92rem;color:var(--muted)}
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.step{display:flex;gap:8px;align-items:flex-start;font-size:.92rem}.num{flex:none;width:30px;height:30px;border-radius:50%;display:grid;place-items:center;color:white;background:var(--pink);font-weight:800}
+.progressrow{display:flex;align-items:center;gap:10px;font-weight:800}.bar{height:12px;background:#e4e9f3;border-radius:99px;overflow:hidden;flex:1}.bar>div{height:100%;background:linear-gradient(90deg,var(--pink),#a64fe0);width:0;transition:width .2s}
+.question{font-size:1.15rem;font-weight:800;margin:12px 0}.answers{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:9px}.answer{display:flex;gap:9px;text-align:left;align-items:flex-start;border:2px solid var(--line);background:#fff;border-radius:12px;padding:12px;cursor:pointer;font:inherit;color:var(--ink)}.answer:hover{border-color:#86bffb;background:#f5fbff}.answer.selected{border-color:var(--blue);background:#eaf7ff}.answer:focus-visible,button:focus-visible,a:focus-visible{outline:3px solid #ffc34d;outline-offset:2px}
+button{border:0;border-radius:12px;padding:12px 18px;font:inherit;font-weight:800;cursor:pointer}.primary{background:var(--pink);color:white}.secondary{background:#e9edf6;color:#34405a}.actions{display:flex;gap:10px;justify-content:space-between;flex-wrap:wrap;margin-top:16px}.feedback{padding:12px;border-radius:12px;margin-top:12px}.good{background:#e9f8ee;color:#17683c}.bad{background:#fff0e9;color:#8a371c}.hidden{display:none}.resultScore{font-size:2rem;font-weight:900;color:#741b9c}.case textarea{width:100%;min-height:120px;border:1px solid #bbc7da;border-radius:12px;padding:12px;font:inherit}.rubric{width:100%;border-collapse:collapse}.rubric td,.rubric th{border:1px solid var(--line);padding:9px;text-align:left}.rubric th{background:#f2edff}
+footer{text-align:center;color:var(--muted);padding:22px;font-size:.9rem}
+@media(max-width:720px){.wrap{grid-template-columns:1fr}nav{position:static;display:flex;overflow-x:auto;gap:4px}nav a{white-space:nowrap;padding:9px 11px}.grid{grid-template-columns:1fr}.steps{grid-template-columns:repeat(2,1fr)}.hero{grid-template-columns:1fr auto}.answers{grid-template-columns:1fr}.card{padding:15px}}
+@media print{nav,.actions,button{display:none!important}body{background:white}.wrap{display:block}.card{box-shadow:none;break-inside:avoid}}
 </style>
 </head>
-<body><main class="wrap">
-<header class="hero"><h1>Evaluación digital: Variantes genéticas asociadas a la obesidad</h1><p class="sub">Actividad interactiva · Biología / Genética · Tiempo estimado: 10–15 minutos</p></header>
-<section class="card"><h2>Propósito de aprendizaje</h2><p>Explicar cómo algunas variantes genéticas pueden asociarse con la susceptibilidad a la obesidad e interpretar esa relación sin asumir que los genes determinan por completo el peso corporal.</p>
-<div class="note"><b>Instrucciones:</b> Lee cada pregunta y selecciona una respuesta. Al terminar, pulsa <b>“Evaluar respuestas”</b>. Recibirás tu puntuación y retroalimentación por pregunta. Puedes revisar tus respuestas y volver a intentarlo.</div>
-<p class="small"><b>Evidencia de aprendizaje:</b> respuestas seleccionadas, puntuación final y revisión de la retroalimentación. Esta actividad es formativa y no solicita información personal ni datos de salud.</p></section>
-<form id="quiz" class="card">
-<h2>Cuestionario</h2>
-<div class="q" data-answer="1" data-explain="Correcto. Una variante genética puede contribuir a la susceptibilidad, pero la obesidad es multifactorial e intervienen también el ambiente, la alimentación, el sueño, la actividad física y otros factores.">
-<p>1. ¿Qué significa que una variante genética esté asociada con la obesidad?</p>
-<label><input type="radio" name="q0" value="0"> Que necesariamente causa obesidad en todas las personas.</label>
-<label><input type="radio" name="q0" value="1"> Que puede relacionarse con una mayor o menor susceptibilidad, sin determinar por sí sola el resultado.</label>
-<label><input type="radio" name="q0" value="2"> Que los hábitos y el ambiente dejan de tener importancia.</label></div>
-<div class="q" data-answer="2" data-explain="Correcto. FTO es uno de los genes estudiados por su asociación estadística con diferencias en el riesgo de obesidad; no es un “gen único” que la determine.">
-<p>2. ¿Cuál de estos genes se ha estudiado ampliamente por su asociación con la susceptibilidad a la obesidad común?</p>
-<label><input type="radio" name="q1" value="0"> HBB</label>
-<label><input type="radio" name="q1" value="1"> INS únicamente como explicación universal</label>
-<label><input type="radio" name="q1" value="2"> FTO</label></div>
-<div class="q" data-answer="0" data-explain="Correcto. La obesidad común suele ser poligénica y multifactorial: muchas variantes de pequeño efecto pueden interactuar con factores ambientales y conductuales.">
-<p>3. ¿Cuál describe mejor la base genética de la mayoría de los casos de obesidad?</p>
-<label><input type="radio" name="q2" value="0"> La contribución de muchas variantes junto con factores ambientales y conductuales.</label>
-<label><input type="radio" name="q2" value="1"> Una sola variante que siempre produce obesidad.</label>
-<label><input type="radio" name="q2" value="2"> La ausencia total de influencia genética.</label></div>
-<div class="q" data-answer="1" data-explain="Correcto. Una asociación poblacional no permite predecir con certeza el peso de una persona ni diagnosticarla por sí sola.">
-<p>4. Si una persona tiene una variante asociada con mayor riesgo, ¿qué conclusión es adecuada?</p>
-<label><input type="radio" name="q3" value="0"> Desarrollará obesidad inevitablemente.</label>
-<label><input type="radio" name="q3" value="1"> Su riesgo puede ser distinto, pero no se puede determinar el resultado individual solo con esa variante.</label>
-<label><input type="radio" name="q3" value="2"> No puede modificar sus factores de riesgo.</label></div>
-<div class="q" data-answer="2" data-explain="Correcto. La investigación genética debe interpretarse con cautela y junto con evidencia clínica y ambiental; no se debe estigmatizar ni culpar a las personas por su peso.">
-<p>5. ¿Cuál es una interpretación responsable de los estudios genéticos sobre obesidad?</p>
-<label><input type="radio" name="q4" value="0"> Usarlos para culpar a las personas por su peso.</label>
-<label><input type="radio" name="q4" value="1"> Considerar que el ambiente no influye.</label>
-<label><input type="radio" name="q4" value="2"> Reconocer que aportan información sobre susceptibilidad, con límites y sin determinismo genético.</label></div>
-<div class="q" data-answer="0" data-explain="Correcto. Las variantes pueden influir en procesos biológicos relacionados con apetito, saciedad o metabolismo, pero sus efectos dependen del contexto y de múltiples factores.">
-<p>6. ¿Cómo pueden influir algunas variantes genéticas en el riesgo de obesidad?</p>
-<label><input type="radio" name="q5" value="0"> Mediante efectos en procesos biológicos como el apetito, la saciedad o el balance energético.</label>
-<label><input type="radio" name="q5" value="1"> Eliminando toda influencia del entorno.</label>
-<label><input type="radio" name="q5" value="2"> Garantizando el mismo peso en todas las personas.</label></div>
-<button class="primary" type="button" onclick="grade()">Evaluar respuestas</button>
-<button class="secondary" type="button" onclick="resetQuiz()">Volver a intentar</button>
-</form>
-<section id="result" class="card" aria-live="polite"><h2>Resultados y retroalimentación</h2><p class="score" id="score"></p><p id="overall"></p><div id="details"></div><button class="primary" onclick="window.print()">Guardar o imprimir resultados</button></section>
-<section class="card"><h2>Criterios de evaluación</h2><ul><li><b>6 puntos:</b> una respuesta correcta por pregunta (1 punto cada una).</li><li><b>5–6 puntos:</b> logro destacado; interpreta adecuadamente los conceptos.</li><li><b>3–4 puntos:</b> logro en proceso; revisar las preguntas con error.</li><li><b>0–2 puntos:</b> requiere reforzar los conceptos básicos y volver a intentarlo.</li></ul><p class="small">Herramienta digital: cuestionario web autocorregible. Su función es proporcionar práctica inmediata y retroalimentación. Para registrar resultados de un grupo, el docente puede solicitar que cada estudiante entregue una captura o transcriba su puntuación en la plataforma del curso.</p></section>
-<footer>Actividad educativa. No sustituye la evaluación ni la orientación de profesionales de salud.</footer>
-</main>
+<body>
+<header><div class="hero"><div><div style="font-weight:900;color:#8c268f;letter-spacing:.08em">🧬 MISIÓN: ADN</div><h1>¡Reto Genético!</h1><p><strong>Variantes genéticas asociadas a la obesidad</strong><br>Una aventura interactiva para aprender jugando ✨</p></div><div class="mascot" aria-hidden="true">🧬🔬</div></div></header>
+<div class="wrap">
+<nav aria-label="Secciones"><a href="#inicio">🏠 Inicio</a><a href="#tema">🧬 Aprende</a><a href="#quiz">🎯 Cuestionario</a><a href="#caso">🕵️ Caso reto</a><a href="#criterios">🏆 Evaluación</a></nav>
+<main>
+<section id="inicio" class="grid">
+<div class="card pink"><h2>🎯 Tu misión</h2><p>Explicar cómo algunas variantes genéticas pueden asociarse con la susceptibilidad a la obesidad, sin asumir que los genes determinan por completo el peso corporal.</p></div>
+<div class="card blue"><h2>⏱️ ¿Cómo jugar?</h2><p>Responde 10 preguntas, revisa la retroalimentación inmediata y completa el caso final. ¡Puedes volver a intentarlo!</p><p class="small">Tiempo estimado: 10–15 minutos.</p></div>
+</section>
+<section id="tema" class="card">
+<h2>🧠 Antes de comenzar: tres pistas</h2>
+<div class="grid">
+<div class="card blue" style="margin:0"><h2>🧬 ¿Qué es una variante?</h2><p>Es una diferencia en la secuencia del ADN. Algunas variantes pueden influir en cómo funciona un gen o en ciertas características biológicas.</p></div>
+<div class="card lav" style="margin:0"><h2>🌱 Genes + entorno</h2><p>La obesidad es compleja y multifactorial. Pueden influir muchos genes, alimentación, actividad física, sueño, medicamentos y condiciones del entorno.</p></div>
+</div>
+<div class="card green" style="margin:14px 0 0"><h2>💡 Recuerda</h2><p>Una asociación genética no significa que un resultado sea inevitable. Los genes no cuentan toda la historia y no se debe culpar ni estigmatizar a una persona por su peso.</p></div>
+</section>
+<section id="quiz" class="card">
+<div class="progressrow"><span id="qnum">Pregunta 1 de 10</span><div class="bar"><div id="barfill"></div></div><span id="percent">10%</span></div>
+<div class="question" id="question">Cargando pregunta…</div>
+<div class="answers" id="answers"></div>
+<div id="feedback" class="feedback hidden" aria-live="polite"></div>
+<div class="actions"><button class="secondary" id="prev" type="button">← Anterior</button><div><button class="secondary" id="reset" type="button">↻ Reiniciar</button> <button class="primary" id="next" type="button">Siguiente →</button></div></div>
+<div id="final" class="card lav hidden" style="margin-top:18px" aria-live="polite"><h2>🏆 ¡Misión completada!</h2><div id="score" class="resultScore"></div><p id="scoremsg"></p><h3>Tu retroalimentación</h3><div id="review"></div><button class="primary" type="button" onclick="window.print()">🖨️ Guardar / imprimir resultados</button></div>
+</section>
+<section id="caso" class="card case">
+<h2>🕵️ Caso reto: ¡detective del ADN!</h2>
+<p>Dos personas tienen antecedentes familiares de obesidad. Una presenta una variante del gen <em>FTO</em> que en estudios poblacionales se ha asociado con una mayor susceptibilidad. Sus hábitos y entornos son distintos.</p>
+<label for="caseanswer"><strong>¿Qué puede inferirse y qué no puede concluirse? Escribe 3–5 oraciones e incluye dos factores no genéticos.</strong></label>
+<textarea id="caseanswer" placeholder="Mi explicación: la variante puede…"></textarea>
+<p class="small">Guía para revisar tu respuesta: ¿explicaste que asociación no significa certeza? ¿Incluiste dos factores como sueño, alimentación, actividad física, estrés o entorno?</p>
+</section>
+<section id="criterios" class="card">
+<h2>🏆 Criterios de evaluación</h2>
+<table class="rubric"><thead><tr><th>Evidencia</th><th>Puntos</th><th>Qué demuestra</th></tr></thead><tbody>
+<tr><td>Cuestionario interactivo</td><td>10</td><td>Comprensión de conceptos y aplicación de ideas científicas.</td></tr>
+<tr><td>Caso reto</td><td>4</td><td>2 puntos por explicar que la variante no determina el resultado; 2 puntos por mencionar dos factores no genéticos pertinentes.</td></tr>
+<tr><td>Total sugerido</td><td>14</td><td>El cuestionario se autocorrige; el caso se revisa con la guía de criterios.</td></tr></tbody></table>
+<p><strong>Retroalimentación:</strong> cada respuesta incluye explicación. Para el caso, la docente puede valorar la claridad, la interpretación no determinista y los factores ambientales incluidos.</p>
+<p class="small">Esta actividad es educativa; no diagnostica el riesgo individual ni sustituye asesoría profesional.</p>
+</section>
+<footer>🧬 Aprende con curiosidad, interpreta la evidencia y recuerda: la obesidad es multifactorial.</footer>
+</main></div>
 <script>
-function grade(){
- const qs=[...document.querySelectorAll('.q')];let score=0;const details=document.getElementById('details');details.innerHTML='';
- qs.forEach((q,i)=>{const chosen=q.querySelector('input:checked');const correct=Number(q.dataset.answer);const ok=chosen&&Number(chosen.value)===correct;if(ok)score++;const div=document.createElement('div');div.className='feedback '+(ok?'good':'bad');div.innerHTML='<b>Pregunta '+(i+1)+': '+(ok?'Correcta':'Por revisar')+'.</b> '+q.dataset.explain+(chosen?'':' <b>No seleccionaste una respuesta.</b>');details.appendChild(div)});
- document.getElementById('score').textContent='Puntuación: '+score+' de 6 ('+Math.round(score/6*100)+'%)';
- document.getElementById('overall').textContent=score>=5?'¡Excelente! Demuestras una comprensión sólida del carácter multifactorial de la obesidad.':score>=3?'Vas avanzando. Revisa la retroalimentación de cada pregunta y vuelve a intentarlo.':'Conviene repasar la diferencia entre asociación genética y determinismo, así como la interacción entre genes y ambiente. Revisa la retroalimentación y vuelve a intentarlo.';
- document.getElementById('result').style.display='block';document.getElementById('result').scrollIntoView({behavior:'smooth'});
+const data=[
+{q:"¿Qué es una variante genética?",a:["Un cambio en la secuencia del ADN que puede influir en la función de un gen.","Un tipo de dieta para perder peso.","Un ejercicio físico específico.","Una enfermedad causada exclusivamente por la alimentación."],c:0,e:"Una variante genética es una diferencia en la secuencia del ADN. Sus efectos varían; no todas causan enfermedad ni tienen el mismo impacto."},
+{q:"¿Qué significa que una variante esté asociada con la obesidad?",a:["Que toda persona con esa variante tendrá obesidad.","Que se observó una relación estadística con la susceptibilidad, pero no determina el resultado individual.","Que los hábitos ya no importan.","Que la variante siempre es dañina."],c:1,e:"Una asociación indica una relación estadística. No implica que la obesidad sea inevitable ni prueba por sí sola causalidad."},
+{q:"¿Cuál de estos genes se ha estudiado por su asociación con la susceptibilidad a la obesidad común?",a:["HBB, como explicación universal.","Ningún gen se ha estudiado.","FTO.","Un gen que determina por completo el peso."],c:2,e:"FTO es uno de los genes estudiados en relación con diferencias de susceptibilidad a la obesidad, pero no es un destino genético."},
+{q:"¿Cómo se describe mejor la obesidad común?",a:["Como una condición determinada por un solo gen en todas las personas.","Como algo que depende únicamente de la voluntad.","Como algo sin influencia biológica.","Como un fenómeno multifactorial con contribuciones genéticas y ambientales."],c:3,e:"La obesidad común tiene múltiples contribuciones: variantes genéticas, biología, entorno, hábitos y otros factores."},
+{q:"¿Cuál es un ejemplo de factor no genético que puede influir en el peso corporal?",a:["El entorno alimentario y el acceso a alimentos.","La secuencia de ADN heredada, únicamente.","El grupo sanguíneo como causa universal.","Una variante que obliga a tener el mismo peso."],c:0,e:"El entorno alimentario, el sueño, la actividad física, ciertos medicamentos y factores sociales pueden influir en la salud y el peso."},
+{q:"Si una persona tiene una variante asociada con mayor susceptibilidad, ¿qué conclusión es más adecuada?",a:["Desarrollará obesidad con certeza.","No puede cambiar ningún hábito.","Su riesgo puede diferir, pero no se puede predecir su resultado solo con esa variante.","La genética elimina la influencia del ambiente."],c:2,e:"Una variante puede modificar probabilidades, no asegurar un resultado. La interpretación individual requiere considerar muchos factores."},
+{q:"¿Por qué los investigadores estudian grupos grandes de personas?",a:["Para demostrar que todas las personas son iguales.","Para observar patrones estadísticos y estimar asociaciones entre variantes y características.","Para reemplazar todas las evaluaciones clínicas.","Para probar que el ambiente no importa."],c:1,e:"Los estudios poblacionales ayudan a identificar asociaciones y estimar efectos, aunque tienen límites y no predicen perfectamente a cada individuo."},
+{q:"¿Qué quiere decir que una característica sea poligénica?",a:["Que depende de una sola variante.","Que no tiene relación con genes.","Que solo aparece por el ambiente.","Que intervienen muchas variantes genéticas, a menudo con efectos pequeños."],c:3,e:"Poligénico significa que participan muchas variantes. En la obesidad común también importan el ambiente y otros factores."},
+{q:"¿Cuál es una forma responsable de comunicar los hallazgos genéticos?",a:["Decir que una persona tiene la culpa de su peso.","Afirmar que los genes lo explican todo.","Explicar la susceptibilidad y los límites de la evidencia sin estigmatizar.","Prometer que una prueba genética predice con certeza el futuro."],c:2,e:"La comunicación responsable evita el determinismo y el estigma, y explica los límites de la evidencia científica."},
+{q:"¿Qué afirmación resume mejor la relación entre genes y ambiente?",a:["Los genes y el ambiente pueden interactuar; ninguno explica por sí solo todos los casos.","El ambiente nunca cambia nada.","Los genes determinan siempre el peso exacto.","Los hábitos explican todos los casos y la genética no influye."],c:0,e:"La obesidad es multifactorial: la genética puede contribuir a la susceptibilidad, mientras que el entorno y otros factores también importan."}
+];
+let current=0,answers=Array(data.length).fill(null),checked=false;
+const qnum=document.getElementById('qnum'),percent=document.getElementById('percent'),bar=document.getElementById('barfill'),question=document.getElementById('question'),answerbox=document.getElementById('answers'),feedback=document.getElementById('feedback'),final=document.getElementById('final');
+function render(){
+ const d=data[current];qnum.textContent=`Pregunta ${current+1} de ${data.length}`;percent.textContent=`${Math.round((current+1)/data.length*100)}%`;bar.style.width=percent.textContent;
+ question.textContent=d.q;answerbox.innerHTML='';feedback.className='feedback hidden';feedback.textContent='';
+ d.a.forEach((txt,i)=>{const b=document.createElement('button');b.type='button';b.className='answer'+(answers[current]===i?' selected':'');b.innerHTML=`<span>${['🅰️','🅱️','🅲','🅳'][i]}</span><span>${txt}</span>`;b.disabled=checked;b.onclick=()=>{answers[current]=i;render()};answerbox.appendChild(b)});
+ document.getElementById('prev').disabled=current===0;document.getElementById('prev').style.opacity=current===0?.45:1;
+ document.getElementById('next').textContent=current===data.length-1?(checked?'Ver resultados':'Evaluar respuestas'):'Siguiente →';
+ if(checked){const ok=answers[current]===d.c;feedback.className='feedback '+(ok?'good':'bad');feedback.innerHTML=`<strong>${ok?'¡Correcto! 🌟':'Vamos a aprender 💡'}</strong> ${d.e}`}
 }
-function resetQuiz(){document.getElementById('quiz').reset();document.getElementById('result').style.display='none';window.scrollTo({top:0,behavior:'smooth'});}
-</script></body></html>
+function evaluate(){checked=true;let score=0;data.forEach((d,i)=>{if(answers[i]===d.c)score++});document.getElementById('score').textContent=`${score} / ${data.length} puntos`;document.getElementById('scoremsg').textContent=score>=9?'¡Nivel experto! Interpretas muy bien la relación entre genética y ambiente.':score>=7?'¡Buen trabajo! Revisa la retroalimentación para fortalecer los conceptos.':'¡Cada intento te ayuda a aprender! Repasa las explicaciones y vuelve a intentarlo.';const r=document.getElementById('review');r.innerHTML='';data.forEach((d,i)=>{const div=document.createElement('div');div.className='feedback '+(answers[i]===d.c?'good':'bad');div.innerHTML=`<strong>${i+1}. ${answers[i]===d.c?'Correcta':'Por repasar'}.</strong> ${d.e}`;r.appendChild(div)});final.classList.remove('hidden');render();final.scrollIntoView({behavior:'smooth',block:'start'})}
+document.getElementById('next').onclick=()=>{if(checked){final.scrollIntoView({behavior:'smooth'});return}if(current<data.length-1){current++;render()}else evaluate()};
+document.getElementById('prev').onclick=()=>{if(current>0){current--;render()}};
+document.getElementById('reset').onclick=()=>{current=0;answers=Array(data.length).fill(null);checked=false;final.classList.add('hidden');render();document.getElementById('quiz').scrollIntoView({behavior:'smooth'})};
+render();
+</script>
+</body></html>
